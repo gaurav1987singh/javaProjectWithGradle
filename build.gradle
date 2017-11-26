@@ -1,6 +1,48 @@
 apply plugin: 'java'
+apply plugin: 'org.sonarqube'
+apply plugin: 'jacoco'
+
 jar {
     manifest {
-        attributes 'Main-Class': 'HelloWorld'
+        attributes 'Main-Class': 'com.java2novice.algos.MyBubbleSort'
     }
 }
+
+buildscript {
+  repositories {
+    maven {
+      url "https://plugins.gradle.org/m2/"
+    }
+  }
+  dependencies {
+    classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.6"
+  }
+}
+
+//Sonar main configuration
+    sonarqube {
+    properties {
+        property "sonar.projectName", "javaProjectWithGradle"
+        property "sonar.projectKey", "org.sonarqube:javaProjectWithGradle"
+        property "sonar.jacoco.reportPaths", "${project.buildDir}/jacoco/test.exec"
+        property "sonar.scm.provider", "git"
+    }
+}
+
+// Generate code coverage reports ... run with jacoco
+jacocoTestReport {
+         group = "Reporting"
+         description = "Generate Jacoco coverage reports after running tests."
+         reports {
+                xml{
+                    enabled true
+                    destination "${buildDir}/reports/jacoco/jacoco.xml"
+                }
+                csv.enabled false
+                html{
+                    enabled true
+                    destination "${buildDir}/jacocoHtml"
+                }
+        }
+        additionalSourceDirs = files(sourceSets.main.allJava.srcDirs)
+   }
