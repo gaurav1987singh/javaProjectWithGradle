@@ -1,6 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'org.sonarqube'
 apply plugin: 'jacoco'
+apply plugin: 'com.jfrog.artifactory'
 
 jar {
     manifest {
