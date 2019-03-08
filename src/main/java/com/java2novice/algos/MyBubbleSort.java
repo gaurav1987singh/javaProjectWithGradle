@@ -1,5 +1,5 @@
 /**
- * @author Gaurav Singh Negi
+ * 
  */
 package com.java2novice.algos;
   
