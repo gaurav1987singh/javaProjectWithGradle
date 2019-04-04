@@ -62,3 +62,7 @@ publishing {
         }
     }
 }
+
+task printValues <<{
+println "ProjectName: $project.name"
+}
