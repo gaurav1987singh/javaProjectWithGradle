@@ -3,7 +3,7 @@ node {
    def gradleHome
   stage('Checkout stage') { // for display purposes
       // Get some code from a GitHub repository
-      git branch: 'artifactIntegration',url: 'https://github.com/gaurav1987singh/javaProjectWithGradle.git'
+      git branch: 'artifactIntegration', 'https://github.com/gaurav1987singh/javaProjectWithGradle.git'
       echo "In Checkout stage"
       // Get the Maven tool.
       // ** NOTE: This 'M3' Maven tool must be configured
@@ -73,7 +73,7 @@ bat script: "${gradleHome}\\bin\\gradle sonarqube -Dsonar.host.url=http://localh
     }
  ]
    }"""
-server.upload spec: uploadSpec
+server.upload(uploadSpec)
   } 
   
   stage('Deploy to Artifactory using gradle'){
