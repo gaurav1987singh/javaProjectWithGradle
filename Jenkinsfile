@@ -69,7 +69,7 @@ bat script: "${gradleHome}\\bin\\gradle sonarqube -Dsonar.host.url=http://localh
       def uploadSpec = """{
  "files": [
   {
-      echo "WorkSpace:${WORKSPACE}"
+      //echo "WorkSpace:${WORKSPACE}"
       "pattern": "${WORKSPACE}\\build\\libs\\javaProject_withArtifactoryIntegration-1.3.jar",
       "target": "gauravLocalRepo/com/sample/program/javaProject_withArtifactoryIntegration"
     }
