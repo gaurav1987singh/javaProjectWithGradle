@@ -3,7 +3,7 @@ node {
    def gradleHome
   stage('Checkout stage') { // for display purposes
       // Get some code from a GitHub repository
-      git branch: 'artifactIntegration',url: 'https://github.com/gaurav1987singh/javaProjectWithGradle.git'
+      git branch: 'artifactIntegration', 'https://github.com/gaurav1987singh/javaProjectWithGradle.git'
       echo "In Checkout stage"
       // Get the Maven tool.
       // ** NOTE: This 'M3' Maven tool must be configured
@@ -19,7 +19,7 @@ node {
          sh "'${gradleHome}/bin/gradle' clean"
       } else {
          echo "Inside Windows System"
-         bat script: "${gradleHome}\\bin\\gradle clean"
+         //bat script: "${gradleHome}\\bin\\gradle clean"
       }  
        
    }
@@ -68,7 +68,7 @@ bat script: "${gradleHome}\\bin\\gradle sonarqube -Dsonar.host.url=http://localh
       def uploadSpec = """{
  "files": [
   {
-      "pattern": "${WORKSPACE}/build/libs/gradlePipeline_forJavaProject-1.0.jar",
+      "pattern": "${WORKSPACE}/build/libs/javaProject_withArtifactoryIntegration-1.3.jar",
       "target": "gauravLocalRepo/"
     }
  ]
