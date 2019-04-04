@@ -9,7 +9,7 @@ node {
       // ** NOTE: This 'M3' Maven tool must be configured
       // **       in the global configuration.           
       //mvnHome = tool name: 'maven354', type: 'maven'
-      gradleHome = tool name: 'gradle5', type: 'gradle' 
+      gradleHome = tool name: 'gradle45', type: 'gradle' 
    }
    
    stage ('Clean'){
