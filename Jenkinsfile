@@ -3,7 +3,7 @@ node {
    def gradleHome
   stage('Checkout stage') { // for display purposes
       // Get some code from a GitHub repository
-      git branch: 'artifactIntegration', 'https://github.com/gaurav1987singh/javaProjectWithGradle.git'
+      git branch: 'artifactIntegration',url: 'https://github.com/gaurav1987singh/javaProjectWithGradle.git'
       echo "In Checkout stage"
       // Get the Maven tool.
       // ** NOTE: This 'M3' Maven tool must be configured
