@@ -19,7 +19,7 @@ version = "1.0"
 
 dependencies {
 		testCompile 'junit:junit:4.12'
-		compile 'com.sample.program:gradlePipelineDemo_JavaProject:1.0'
+		//compile 'com.sample.program:gradlePipelineDemo_JavaProject:1.0'
 	}
 
 jar {
