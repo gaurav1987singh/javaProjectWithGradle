@@ -83,7 +83,7 @@ server.upload(uploadSpec)
         echo "Running Artifactory from  Unix System"
        sh "'${gradleHome}/bin/gradle' artifactoryPublish"
      } else {    
-     //bat script: "${gradleHome}\\bin\\gradle artifactoryPublish"   
+     bat script: "${gradleHome}\\bin\\gradle artifactoryPublish"   
   }
  }
 }
