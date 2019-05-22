@@ -15,7 +15,7 @@ repositories {
 }
 
 group = "com.sample.program"
-version = "1.4"
+version = "1.0-SNAPSHOT"
 
 dependencies {
 		testCompile 'junit:junit:4.12'
@@ -27,7 +27,7 @@ jar {
         attributes 'Main-Class': 'HelloWorld'
     }
 }
-
+/* Below task for uploading to local mavenRepository */
 uploadArchives {
     repositories {
         mavenDeployer {
@@ -35,6 +35,21 @@ uploadArchives {
 	}
     }
 }
+
+uploadArchives {
+   repositories {
+      mavenDeployer {
+               repository(url: "http://localhost:8082/repository/gaurav_testSnapshot/${project.getName()}/${BUILD_ID}") {
+               authentication(userName: "admin", password: "admin123")
+}
+               //pom.version = "1.0-SNAPSHOT"
+              // pom.artifactId = "NexusUpload_Binary"
+              // pom.groupId = "com.example"
+       }
+   }
+}
+
+
 
  artifactory {
     contextUrl = "${artifactory_contextUrl}"   //The base Artifactory URL if not overridden by the publisher/resolver
