@@ -3,7 +3,7 @@ node {
    def gradleHome
   stage('Checkout stage') { // for display purposes
       // Get some code from a GitHub repository
-      git branch: 'artifactIntegration', url: 'https://github.com/gaurav1987singh/javaProjectWithGradle.git'
+      git branch: 'nexusIntegration', url: 'https://github.com/gaurav1987singh/javaProjectWithGradle.git'
       echo "In Checkout stage"
       // Get the Maven tool.
       // ** NOTE: This 'M3' Maven tool must be configured
@@ -66,7 +66,7 @@ bat script: "${gradleHome}\\bin\\gradle sonarqube -Dsonar.host.url=http://localh
          if (isUnix()) {
        sh "'${gradleHome}/bin/gradle' uploadArchives -i"
        } else {
-          bat script: "${gradleHome}\\bin\\gradle uploadArchives -i"
+          bat script: "${gradleHome}\\bin\\gradle uploadArchives"
          }  
       }
 	  
