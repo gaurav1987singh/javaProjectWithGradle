@@ -28,13 +28,13 @@ jar {
     }
 }
 /* Below task for uploading to local mavenRepository */
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            repository(url: "file://C:/Users/585933/.m2/repository/")
-	}
-    }
-}
+//uploadArchives {
+    //repositories {
+       // mavenDeployer {
+       //     repository(url: "file://C:/Users/585933/.m2/repository/")
+	//}
+    //}
+//}
 
 uploadArchives {
    repositories {

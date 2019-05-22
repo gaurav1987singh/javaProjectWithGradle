@@ -51,15 +51,25 @@ node {
 bat script: "${gradleHome}\\bin\\gradle sonarqube -Dsonar.host.url=http://localhost:9000 -Dsonar.login=860b7e9e06174ee34335ad0f6f200f4fc8737725"
       }
    }
-      stage ('Deploy to Maven local'){
-          echo "Deploy to Maven local begins"
+      //stage ('Deploy to Maven local'){
+          //echo "Deploy to Maven local begins"
+         //if (isUnix()) {
+       //sh "'${gradleHome}/bin/gradle' uploadArchives -i"
+      // } else {
+        //  bat script: "${gradleHome}\\bin\\gradle uploadArchives -i"
+        // }  
+     // }
+      
+	  
+	  stage ('Deploy to Nexus Server'){
+          echo "Deploy to Nexus Server begins"
          if (isUnix()) {
        sh "'${gradleHome}/bin/gradle' uploadArchives -i"
        } else {
           bat script: "${gradleHome}\\bin\\gradle uploadArchives -i"
          }  
       }
-      
+	  
       stage('Deploy to Artifactory cloud'){
       def server = Artifactory.server 'manjuArtifactory'
       echo "$server"
@@ -81,9 +91,9 @@ server.upload(uploadSpec)
       //sh label: '', script: "curl -uadmin:APAtN1w4MuidS5RwTrPPwvSmQtr -T ${WORKSPACE}/build/libs/gradlePipelineDemo_forJavaProject-1.0.jar https://artifactoryg01dy.jfrog.io/artifactoryg01dyg01dy/libs-snapshot/com/sample/program/gradlePipelineDemo_forJavaProject/1.0"
      if (isUnix()) {
         echo "Running Artifactory from  Unix System"
-       sh "'${gradleHome}/bin/gradle' artifactoryPublish"
-     } else {    
-     bat script: "${gradleHome}\\bin\\gradle artifactoryPublish"   
-  }
+       //sh "'${gradleHome}/bin/gradle' artifactoryPublish"
+     //} else {    
+     //bat script: "${gradleHome}\\bin\\gradle artifactoryPublish"   
+  //}
  }
 }
