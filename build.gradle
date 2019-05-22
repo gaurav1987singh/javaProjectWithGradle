@@ -15,7 +15,7 @@ repositories {
 }
 
 group = "com.sample.program"
-version = "1.0-SNAPSHOT"
+version = "0.0.1-SNAPSHOT"
 
 dependencies {
 		testCompile 'junit:junit:4.12'
