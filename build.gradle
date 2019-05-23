@@ -15,7 +15,7 @@ repositories {
 }
 
 group = "com.sample.program"
-version = "0.0.1-SNAPSHOT"
+version = "1.0-SNAPSHOT"
 
 dependencies {
 		testCompile 'junit:junit:4.12'
@@ -39,7 +39,7 @@ jar {
 uploadArchives {
    repositories {
       mavenDeployer {
-               repository(url: "http://localhost:8082/repository/gaurav_testSnapshot/${env.project.getName()}/${BUILD_ID}") {
+               repository(url: "http://localhost:8082/repository/gaurav_testSnapshot") {
                authentication(userName: "admin", password: "admin123")
 }
                //pom.version = "1.0-SNAPSHOT"
