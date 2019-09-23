@@ -7,6 +7,6 @@ jdk: oraclejdk8
 
 script:
   -  pwd
-  - ./gradlew --v
-  - ./gradlew build --scan -s
+  -  gradle --v
+  -  gradle build --scan -s
   
