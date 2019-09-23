@@ -1,11 +1,12 @@
 language: java
-install: true
+install: gradle
 
 os: linux
 dist: trusty
 jdk: oraclejdk8
 
 script:
+  -  pwd
   - ./gradlew --v
   - ./gradlew build --scan -s
   
