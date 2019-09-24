@@ -15,11 +15,11 @@ repositories {
 }
 
 group = "com.sample.program"
-version = "1.6"
+version = "1.7"
 
 dependencies {
 		testCompile 'junit:junit:4.12'
-		compile 'com.sample.program:javaProjectWithGradle:1.6'
+		compile 'com.sample.program:javaProjectWithGradle:1.7'
 	}
 
 jar {
