@@ -10,7 +10,7 @@ repositories {
     maven {
     	 mavenCentral()
          url "https://repo.maven.apache.org/maven2"
-	 url "https://artifactoryg01dy.jfrog.io/artifactoryg01dy/webapp/gauravLocalRepo"
+	 url "https://geekmj.jfrog.io/geekmj/webapp/gauravLocalRepo"
     }
 }
 
