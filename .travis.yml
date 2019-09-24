@@ -7,6 +7,5 @@ jdk: oraclejdk8
 
 script:
   -  pwd
-  -  gradle --v
   -  gradle build --scan -s
-  
+  -  gradle artifactoryPublish
