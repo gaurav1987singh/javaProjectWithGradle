@@ -1,64 +1,61 @@
 plugins {
   id "java"
   id "org.sonarqube" version "2.7"
-  id "maven"
-  id "maven-publish"
-  id "com.jfrog.artifactory" version "4.9.3"
-}
+  apply plugin: 'jacoco'
+  }
 
 repositories {
     maven {
     	 mavenCentral()
-         url "https://repo.maven.apache.org/maven2"
-	 url "https://artifactoryg01dy.jfrog.io/artifactoryg01dy/webapp/gauravLocalRepo"
+         jcenter()
+                maven {
+                        url "https://plugins.gradle.org/m2/"
+                }
+	
     }
 }
 
-group = "com.sample.program"
-version = "1.5"
-
-dependencies {
-		testCompile 'junit:junit:4.12'
-		compile 'com.sample.program:gradlePipelineDemo_JavaProject:1.0'
-	}
+dependencies{
+classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.8"
+testCompile 'junit:junit:4.12'
+}
 
 jar {
-    manifest {
-        attributes 'Main-Class': 'HelloWorld'
+
+    baseName = 'HelloWorld'
+
+    version = '0.0.1-SNAPSHOT'
+
+    destinationDir(file('build/tmp'))
+
+}
+
+sonarqube {
+
+    properties {
+
+        property "sonar.projectName", "HelloWorld"
+
+        property "sonar.projectKey", "org.sonarqube:helloworldSample"
+
+        property "sonar.jacoco.reportPath", "${project.buildDir}/jacoco/test.exec"
+
+        property "sonar.scm.provider", "git"
+
+        //property "sonar.exclusions",
+    }
+
+}
+
+sourceSets {
+
+    test {
+
+        java.srcDir 'src/test/unit/java'
+
+        resources.srcDir 'src/test/unit/resources'
+
     }
 }
 
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            repository(url: "file://C:/Users/585933/.m2/repository/")
-	}
-    }
-}
 
- artifactory {
-    contextUrl = "${artifactory_contextUrl}"   //The base Artifactory URL if not overridden by the publisher/resolver
-    publish {
-        repository {
-            repoKey = 'gauravLocalRepo'
-            username = "${artifactory_user}"
-            password = "${artifactory_password}"
-            maven = true  
-       }
-       defaults {
-            publications ('mavenJava')
-        }
-    }
-  }
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-	    //groupId packageName
-            //version = libraryVersion
-            //artifactId project.getName()
-            //artifact("$buildDir//libs//${project.getName()}-${version}.jar")
-        }
-    }
-}
