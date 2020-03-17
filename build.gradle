@@ -1,64 +1,57 @@
-plugins {
-  id "java"
-  id "org.sonarqube" version "2.7"
-  id "maven"
-  id "maven-publish"
-  id "com.jfrog.artifactory" version "4.9.3"
-}
-
-repositories {
-    maven {
-    	 mavenCentral()
-         url "https://repo.maven.apache.org/maven2"
-	 url "https://artifactoryg01dy.jfrog.io/artifactoryg01dy/webapp/gauravLocalRepo"
+buildscript {
+    repositories {
+        //mavenCentral()
+		 maven { url "https://repo.maven.apache.org/maven2" }
+    }
+    dependencies {
+        classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.8"
     }
 }
 
-group = "com.sample.program"
-version = "1.5"
+
+
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'application'
+apply plugin: 'org.sonarqube'
+
+
+def projectName = 'JavaHelloWorldProject'
+mainClassName = 'hello.HelloWorld'
+
+// tag::repositories[]
+repositories {
+    mavenCentral()
+	maven { url "https://repo.maven.apache.org/maven2" }
+}
+// end::repositories[]
+
+// tag::jar[]
+jar {
+    baseName = 'jb-hello-world'
+    version =  '0.1.0'
+}
+// end::jar[]
+
+// tag::dependencies[]
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+sonarqube {
+  properties {
+    property 'sonar.projectName', projectName
+  }
+}
 
 dependencies {
-		testCompile 'junit:junit:4.12'
-		compile 'com.sample.program:gradlePipelineDemo_JavaProject:1.0'
-	}
-
-jar {
-    manifest {
-        attributes 'Main-Class': 'HelloWorld'
-    }
+    compile "joda-time:joda-time:2.2"
+    testCompile "junit:junit:4.12"
 }
+// end::dependencies[]
 
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            repository(url: "file://C:/Users/585933/.m2/repository/")
-	}
-    }
-}
-
- artifactory {
-    contextUrl = "${artifactory_contextUrl}"   //The base Artifactory URL if not overridden by the publisher/resolver
-    publish {
-        repository {
-            repoKey = 'gauravLocalRepo'
-            username = "${artifactory_user}"
-            password = "${artifactory_password}"
-            maven = true  
-       }
-       defaults {
-            publications ('mavenJava')
-        }
-    }
-  }
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-	    //groupId packageName
-            //version = libraryVersion
-            //artifactId project.getName()
-            //artifact("$buildDir//libs//${project.getName()}-${version}.jar")
-        }
-    }
-}
+// tag::wrapper[]
+//task wrapper(type: Wrapper) {
+    //gradleVersion = '3.5'
+//}
+// end::wrapper[]
