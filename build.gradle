@@ -15,6 +15,7 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'application'
 apply plugin: 'org.sonarqube'
+apply plugin: 'jacoco'
 
 
 def projectName = 'JavaHelloWorldProject'
@@ -49,6 +50,35 @@ dependencies {
     testCompile "junit:junit:4.12"
 }
 // end::dependencies[]
+
+jacoco {
+	toolVersion = "0.8.5"
+	reportsDir = file("$buildDir/customJacocoReportDir")
+}
+
+test {
+	
+	jacoco {
+		excludes = ['src/test/**']
+		append = false
+		destinationFile = file("$buildDir/jacoco/jacocoTest.exec")
+		classDumpFile = file("$buildDir/jacoco/classpathdumps")
+	}
+	ignoreFailures = true
+}
+
+jacocoTestReport {
+	reports {
+		xml.enabled true
+		csv.enabled false
+		html.destination "${buildDir}/jacocoHtml"
+	}
+}
+
+jacocoTestReport.dependsOn test
+
+
+
 
 // tag::wrapper[]
 //task wrapper(type: Wrapper) {
