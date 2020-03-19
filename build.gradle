@@ -42,8 +42,12 @@ targetCompatibility = 1.8
 sonarqube {
   properties {
     property 'sonar.projectName', projectName
+	//property "sonar.jacoco.reportPath", "${project.buildDir}/jacoco/test.exec"
+	//property "sonar.coverage.jacoco.xmlReportPaths", "${project.buildDir}/jacoco/test.exec"
   }
 }
+
+
 
 dependencies {
     compile "joda-time:joda-time:2.2"
@@ -56,28 +60,18 @@ jacoco {
 	reportsDir = file("$buildDir/customJacocoReportDir")
 }
 
-test {
-	
-	jacoco {
-		excludes = ['src/test/**']
-		append = false
-		destinationFile = file("$buildDir/jacoco/jacocoTest.exec")
-		
-	}
-	ignoreFailures = true
-}
+// Generate code coverage reports ... run with jacoco
 
 jacocoTestReport {
-	reports {
-		xml.enabled true
+    group = "Reporting"
+    reports {
+        xml.enabled true
+		xml.destination file ("${buildDir}/jacoco/jacoco.xml")
 		csv.enabled false
-		html.destination "${buildDir}/jacocoHtml"
-	}
+        html.destination file("${buildDir}/jacocoHtml")
+    }
+    executionData(test)
 }
-
-jacocoTestReport.dependsOn test
-
-
 
 
 // tag::wrapper[]
